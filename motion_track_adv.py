@@ -13,6 +13,7 @@ class detectthing:
     winName = "Movement Indicator"
     cv2.namedWindow(winName)
 
+
     def __init__(self, cascadefile):
         self.data = []
         self.filename = cascadefile
