@@ -64,12 +64,17 @@ class detectthing:
 
             x = cv2.threshold(dimg, 0, 255, cv2.THRESH_OTSU)
             faces = self.facedetect(self.originalImg[0])
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            cv2.putText(self.originalImg[0], "Press 'C', If you want capture image.", (10, 420), font, 0.5, (255, 255, 255), 1)
+
             for (x, y, w, h) in faces:
                 print("Found facecs")
                 cv2.rectangle(self.originalImg[0], (x, y), (x + w, y + h), (255, 0, 0), 2)
+
+                cv2.putText(self.originalImg[0], datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), (10, 450), font, 0.5, (255, 255, 255), 1)
                 paththumb = '/tmp/thumb%s' % (datetime.datetime.now().strftime('%Y%m%d%Hh%Mm%Ss%f') + '.jpg')
                 thumbimg = self.originalImg[0][y:y+h, x:x+w]
-                cv2.imwrite(paththumb, thumbimg )
+
                 cv2.imshow(self.winName, self.originalImg[0])
 
             if cv2.countNonZero(dimg) > 170000:
@@ -92,13 +97,16 @@ class detectthing:
             t_dic[1] = t_dic[2]
             t_dic[2] = self.getImage()
             key = cv2.waitKey(500)
+            print(key)
+            if key == 99 or key==67:
+                cv2.imwrite(paththumb, thumbimg )
             if key == 27:
                 cv2.destroyWindow(self.winName)
                 sys.exit()
 
 def main():
-    #d = detectthing('haarcascade_frontalface_default.xml')
-    d = detectthing('haarcascade_eye.xml')
+    d = detectthing('haarcascade_frontalface_default.xml')
+    #d = detectthing('haarcascade_eye.xml')
     while True:
         d.motionTrack()
 
