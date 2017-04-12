@@ -7,7 +7,8 @@ ap.add_argument("-i", "--image", required=True, help="path to image file")
 args = vars(ap.parse_args())
 
 # load the image and convert it to grayscale
-image = cv2.imread(args["image"])
+#image = cv2.imread(args["image"])
+image = cv2.imread("image.jpg")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # compute the Scharr gradient magnitude reprtesentation of the images 

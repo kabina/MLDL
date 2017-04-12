@@ -1,5 +1,6 @@
 """
 python으로 모션 detect하는 로직
+author: 안창선
 """
 
 import cv2
